@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e2536019ca6e40a3b2edc75f8ad95f8a" Name="Diagram1">
+        <EntityTypeShape EntityType="ReccitModel.Place" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReccitModel.ReccitUser" Width="1.5" PointX="4.125" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReccitModel.sqlblk_Place" Width="1.5" PointX="8.125" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReccitModel.sqlblk_ReccitUser" Width="1.5" PointX="4.125" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReccitModel.sqlblk_UserCheckin" Width="1.5" PointX="5.875" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReccitModel.sqlblk_UserFriendMap" Width="1.5" PointX="5.875" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReccitModel.UserCheckin" Width="1.5" PointX="2.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReccitModel.UserFriendMap" Width="1.5" PointX="2.375" PointY="4.125" IsExpanded="true" />
+        <AssociationConnector Association="ReccitModel.FK_UserCheckin_Place" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

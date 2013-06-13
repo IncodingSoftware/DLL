@@ -1,0 +1,576 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ReccitModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ReccitModelStoreContainer">
+          <EntitySet Name="Place" EntityType="ReccitModel.Store.Place" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ReccitUser" EntityType="ReccitModel.Store.ReccitUser" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sqlblk_Place" EntityType="ReccitModel.Store.sqlblk_Place" store:Type="Tables" store:Schema="dbo" store:Name="sqlblk_Place">
+            <DefiningQuery>SELECT 
+      [sqlblk_Place].[sqlblkJobID] AS [sqlblkJobID], 
+      [sqlblk_Place].[Name] AS [Name], 
+      [sqlblk_Place].[Address] AS [Address], 
+      [sqlblk_Place].[City] AS [City], 
+      [sqlblk_Place].[State] AS [State], 
+      [sqlblk_Place].[Country] AS [Country], 
+      [sqlblk_Place].[Zipcode] AS [Zipcode], 
+      [sqlblk_Place].[Phone] AS [Phone], 
+      [sqlblk_Place].[Location] AS [Location], 
+      [sqlblk_Place].[OpenTanle] AS [OpenTanle], 
+      [sqlblk_Place].[Url] AS [Url], 
+      [sqlblk_Place].[Type] AS [Type], 
+      [sqlblk_Place].[Genre] AS [Genre], 
+      [sqlblk_Place].[Price] AS [Price], 
+      [sqlblk_Place].[FacebookID] AS [FacebookID], 
+      [sqlblk_Place].[FactualID] AS [FactualID], 
+      [sqlblk_Place].[FourSquareID] AS [FourSquareID], 
+      [sqlblk_Place].[DateCreated] AS [DateCreated], 
+      [sqlblk_Place].[IsActive] AS [IsActive]
+      FROM [dbo].[sqlblk_Place] AS [sqlblk_Place]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="sqlblk_ReccitUser" EntityType="ReccitModel.Store.sqlblk_ReccitUser" store:Type="Tables" store:Schema="dbo" store:Name="sqlblk_ReccitUser">
+            <DefiningQuery>SELECT 
+      [sqlblk_ReccitUser].[sqlblkJobID] AS [sqlblkJobID], 
+      [sqlblk_ReccitUser].[ReccitUserID] AS [ReccitUserID], 
+      [sqlblk_ReccitUser].[FirstName] AS [FirstName], 
+      [sqlblk_ReccitUser].[LastName] AS [LastName], 
+      [sqlblk_ReccitUser].[Photo] AS [Photo], 
+      [sqlblk_ReccitUser].[Gender] AS [Gender], 
+      [sqlblk_ReccitUser].[Phone] AS [Phone], 
+      [sqlblk_ReccitUser].[Email] AS [Email], 
+      [sqlblk_ReccitUser].[DOB] AS [DOB], 
+      [sqlblk_ReccitUser].[DateCreated] AS [DateCreated], 
+      [sqlblk_ReccitUser].[IsActive] AS [IsActive], 
+      [sqlblk_ReccitUser].[FacebookID] AS [FacebookID], 
+      [sqlblk_ReccitUser].[TwitterHandler] AS [TwitterHandler], 
+      [sqlblk_ReccitUser].[FourSquareID] AS [FourSquareID]
+      FROM [dbo].[sqlblk_ReccitUser] AS [sqlblk_ReccitUser]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="sqlblk_UserCheckin" EntityType="ReccitModel.Store.sqlblk_UserCheckin" store:Type="Tables" store:Schema="dbo" store:Name="sqlblk_UserCheckin">
+            <DefiningQuery>SELECT 
+      [sqlblk_UserCheckin].[sqlblkJobID] AS [sqlblkJobID], 
+      [sqlblk_UserCheckin].[FBUserID] AS [FBUserID], 
+      [sqlblk_UserCheckin].[PlaceID] AS [PlaceID], 
+      [sqlblk_UserCheckin].[IsReccit] AS [IsReccit], 
+      [sqlblk_UserCheckin].[Rating] AS [Rating], 
+      [sqlblk_UserCheckin].[Review] AS [Review]
+      FROM [dbo].[sqlblk_UserCheckin] AS [sqlblk_UserCheckin]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="sqlblk_UserFriendMap" EntityType="ReccitModel.Store.sqlblk_UserFriendMap" store:Type="Tables" store:Schema="dbo" store:Name="sqlblk_UserFriendMap">
+            <DefiningQuery>SELECT 
+      [sqlblk_UserFriendMap].[sqlblkJobID] AS [sqlblkJobID], 
+      [sqlblk_UserFriendMap].[UserID] AS [UserID], 
+      [sqlblk_UserFriendMap].[FriendID] AS [FriendID]
+      FROM [dbo].[sqlblk_UserFriendMap] AS [sqlblk_UserFriendMap]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UserCheckin" EntityType="ReccitModel.Store.UserCheckin" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserFriendMap" EntityType="ReccitModel.Store.UserFriendMap" store:Type="Tables" store:Schema="dbo" store:Name="UserFriendMap">
+            <DefiningQuery>SELECT 
+      [UserFriendMap].[UserID] AS [UserID], 
+      [UserFriendMap].[FriendID] AS [FriendID]
+      FROM [dbo].[UserFriendMap] AS [UserFriendMap]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_UserCheckin_Place" Association="ReccitModel.Store.FK_UserCheckin_Place">
+            <End Role="Place" EntitySet="Place" />
+            <End Role="UserCheckin" EntitySet="UserCheckin" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="PlaceID" />
+          </Key>
+          <Property Name="PlaceID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" />
+          <Property Name="State" Type="nvarchar" MaxLength="2" />
+          <Property Name="Country" Type="nvarchar" MaxLength="255" />
+          <Property Name="Zipcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Location" Type="nvarchar" MaxLength="50" />
+          <Property Name="OpenTanle" Type="bit" />
+          <Property Name="Url" Type="nvarchar" MaxLength="255" />
+          <Property Name="Type" Type="nvarchar" MaxLength="255" />
+          <Property Name="Genre" Type="nvarchar" MaxLength="255" />
+          <Property Name="Price" Type="int" />
+          <Property Name="FacebookID" Type="nvarchar" MaxLength="255" />
+          <Property Name="FactualID" Type="nvarchar" MaxLength="255" />
+          <Property Name="FourSquareID" Type="nvarchar" MaxLength="255" />
+          <Property Name="DateCreated" Type="smalldatetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReccitUser">
+          <Key>
+            <PropertyRef Name="FacebookID" />
+          </Key>
+          <Property Name="ReccitUserID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="255" />
+          <Property Name="Gender" Type="bit" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="DOB" Type="smalldatetime" />
+          <Property Name="DateCreated" Type="smalldatetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="FacebookID" Type="bigint" Nullable="false" />
+          <Property Name="TwitterHandler" Type="nvarchar" MaxLength="255" />
+          <Property Name="FourSquareID" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'Reccit.dbo.sqlblk_Place' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="sqlblk_Place">
+          <Key>
+            <PropertyRef Name="sqlblkJobID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="DateCreated" />
+            <PropertyRef Name="IsActive" />
+          </Key>
+          <Property Name="sqlblkJobID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" />
+          <Property Name="State" Type="nvarchar" MaxLength="2" />
+          <Property Name="Country" Type="nvarchar" MaxLength="255" />
+          <Property Name="Zipcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Location" Type="nvarchar" MaxLength="50" />
+          <Property Name="OpenTanle" Type="bit" />
+          <Property Name="Url" Type="nvarchar" MaxLength="255" />
+          <Property Name="Type" Type="nvarchar" MaxLength="255" />
+          <Property Name="Genre" Type="nvarchar" MaxLength="255" />
+          <Property Name="Price" Type="int" />
+          <Property Name="FacebookID" Type="nvarchar" MaxLength="255" />
+          <Property Name="FactualID" Type="nvarchar" MaxLength="255" />
+          <Property Name="FourSquareID" Type="nvarchar" MaxLength="255" />
+          <Property Name="DateCreated" Type="smalldatetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'Reccit.dbo.sqlblk_ReccitUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="sqlblk_ReccitUser">
+          <Key>
+            <PropertyRef Name="sqlblkJobID" />
+            <PropertyRef Name="ReccitUserID" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="DateCreated" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="FacebookID" />
+          </Key>
+          <Property Name="sqlblkJobID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ReccitUserID" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Photo" Type="nvarchar" MaxLength="255" />
+          <Property Name="Gender" Type="bit" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="DOB" Type="smalldatetime" />
+          <Property Name="DateCreated" Type="smalldatetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="FacebookID" Type="bigint" Nullable="false" />
+          <Property Name="TwitterHandler" Type="nvarchar" MaxLength="255" />
+          <Property Name="FourSquareID" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'Reccit.dbo.sqlblk_UserCheckin' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="sqlblk_UserCheckin">
+          <Key>
+            <PropertyRef Name="sqlblkJobID" />
+            <PropertyRef Name="FBUserID" />
+            <PropertyRef Name="PlaceID" />
+          </Key>
+          <Property Name="sqlblkJobID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FBUserID" Type="bigint" Nullable="false" />
+          <Property Name="PlaceID" Type="int" Nullable="false" />
+          <Property Name="IsReccit" Type="bit" />
+          <Property Name="Rating" Type="int" />
+          <Property Name="Review" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'Reccit.dbo.sqlblk_UserFriendMap' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="sqlblk_UserFriendMap">
+          <Key>
+            <PropertyRef Name="sqlblkJobID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="FriendID" />
+          </Key>
+          <Property Name="sqlblkJobID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserID" Type="bigint" Nullable="false" />
+          <Property Name="FriendID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserCheckin">
+          <Key>
+            <PropertyRef Name="UserCheckinID" />
+          </Key>
+          <Property Name="UserCheckinID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FBUserID" Type="bigint" Nullable="false" />
+          <Property Name="PlaceID" Type="int" Nullable="false" />
+          <Property Name="IsReccit" Type="bit" />
+          <Property Name="Rating" Type="int" />
+          <Property Name="Review" Type="nvarchar(max)" />
+          <Property Name="DateCreated" Type="smalldatetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'Reccit.dbo.UserFriendMap' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="UserFriendMap">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="FriendID" />
+          </Key>
+          <Property Name="UserID" Type="bigint" Nullable="false" />
+          <Property Name="FriendID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_UserCheckin_Place">
+          <End Role="Place" Type="ReccitModel.Store.Place" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserCheckin" Type="ReccitModel.Store.UserCheckin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="PlaceID" />
+            </Principal>
+            <Dependent Role="UserCheckin">
+              <PropertyRef Name="PlaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ReccitModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Places" EntityType="ReccitModel.Place" />
+          <EntitySet Name="ReccitUsers" EntityType="ReccitModel.ReccitUser" />
+          <EntitySet Name="sqlblk_Place" EntityType="ReccitModel.sqlblk_Place" />
+          <EntitySet Name="sqlblk_ReccitUser" EntityType="ReccitModel.sqlblk_ReccitUser" />
+          <EntitySet Name="sqlblk_UserCheckin" EntityType="ReccitModel.sqlblk_UserCheckin" />
+          <EntitySet Name="sqlblk_UserFriendMap" EntityType="ReccitModel.sqlblk_UserFriendMap" />
+          <EntitySet Name="UserCheckins" EntityType="ReccitModel.UserCheckin" />
+          <EntitySet Name="UserFriendMaps" EntityType="ReccitModel.UserFriendMap" />
+          <AssociationSet Name="FK_UserCheckin_Place" Association="ReccitModel.FK_UserCheckin_Place">
+            <End Role="Place" EntitySet="Places" />
+            <End Role="UserCheckin" EntitySet="UserCheckins" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="PlaceID" />
+          </Key>
+          <Property Name="PlaceID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="City" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="State" Type="String" MaxLength="2" Unicode="true" FixedLength="false" />
+          <Property Name="Country" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Zipcode" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Location" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="OpenTanle" Type="Boolean" />
+          <Property Name="Url" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Type" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Genre" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="FacebookID" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="FactualID" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="FourSquareID" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="UserCheckins" Relationship="ReccitModel.FK_UserCheckin_Place" FromRole="Place" ToRole="UserCheckin" />
+        </EntityType>
+        <EntityType Name="ReccitUser">
+          <Key>
+            <PropertyRef Name="FacebookID" />
+          </Key>
+          <Property Name="ReccitUserID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Photo" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Gender" Type="Boolean" />
+          <Property Name="Phone" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="FacebookID" Type="Int64" Nullable="false" />
+          <Property Name="TwitterHandler" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="FourSquareID" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="sqlblk_Place">
+          <Key>
+            <PropertyRef Name="sqlblkJobID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="DateCreated" />
+            <PropertyRef Name="IsActive" />
+          </Key>
+          <Property Name="sqlblkJobID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="City" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="State" Type="String" MaxLength="2" Unicode="true" FixedLength="false" />
+          <Property Name="Country" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Zipcode" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Location" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="OpenTanle" Type="Boolean" />
+          <Property Name="Url" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Type" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Genre" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="FacebookID" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="FactualID" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="FourSquareID" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sqlblk_ReccitUser">
+          <Key>
+            <PropertyRef Name="sqlblkJobID" />
+            <PropertyRef Name="ReccitUserID" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="DateCreated" />
+            <PropertyRef Name="IsActive" />
+            <PropertyRef Name="FacebookID" />
+          </Key>
+          <Property Name="sqlblkJobID" Type="Guid" Nullable="false" />
+          <Property Name="ReccitUserID" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Photo" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Gender" Type="Boolean" />
+          <Property Name="Phone" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="FacebookID" Type="Int64" Nullable="false" />
+          <Property Name="TwitterHandler" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="FourSquareID" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="sqlblk_UserCheckin">
+          <Key>
+            <PropertyRef Name="sqlblkJobID" />
+            <PropertyRef Name="FBUserID" />
+            <PropertyRef Name="PlaceID" />
+          </Key>
+          <Property Name="sqlblkJobID" Type="Guid" Nullable="false" />
+          <Property Name="FBUserID" Type="Int64" Nullable="false" />
+          <Property Name="PlaceID" Type="Int32" Nullable="false" />
+          <Property Name="IsReccit" Type="Boolean" />
+          <Property Name="Rating" Type="Int32" />
+          <Property Name="Review" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="sqlblk_UserFriendMap">
+          <Key>
+            <PropertyRef Name="sqlblkJobID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="FriendID" />
+          </Key>
+          <Property Name="sqlblkJobID" Type="Guid" Nullable="false" />
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="FriendID" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserCheckin">
+          <Key>
+            <PropertyRef Name="UserCheckinID" />
+          </Key>
+          <Property Name="UserCheckinID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="FBUserID" Type="Int64" Nullable="false" />
+          <Property Name="PlaceID" Type="Int32" Nullable="false" />
+          <Property Name="IsReccit" Type="Boolean" />
+          <Property Name="Rating" Type="Int32" />
+          <Property Name="Review" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Place" Relationship="ReccitModel.FK_UserCheckin_Place" FromRole="UserCheckin" ToRole="Place" />
+        </EntityType>
+        <EntityType Name="UserFriendMap">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="FriendID" />
+          </Key>
+          <Property Name="UserID" Type="Int64" Nullable="false" />
+          <Property Name="FriendID" Type="Int64" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_UserCheckin_Place">
+          <End Role="Place" Type="ReccitModel.Place" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserCheckin" Type="ReccitModel.UserCheckin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Place">
+              <PropertyRef Name="PlaceID" />
+            </Principal>
+            <Dependent Role="UserCheckin">
+              <PropertyRef Name="PlaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ReccitModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Places">
+            <EntityTypeMapping TypeName="ReccitModel.Place">
+              <MappingFragment StoreEntitySet="Place">
+                <ScalarProperty Name="PlaceID" ColumnName="PlaceID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="OpenTanle" ColumnName="OpenTanle" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="FacebookID" ColumnName="FacebookID" />
+                <ScalarProperty Name="FactualID" ColumnName="FactualID" />
+                <ScalarProperty Name="FourSquareID" ColumnName="FourSquareID" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReccitUsers">
+            <EntityTypeMapping TypeName="ReccitModel.ReccitUser">
+              <MappingFragment StoreEntitySet="ReccitUser">
+                <ScalarProperty Name="ReccitUserID" ColumnName="ReccitUserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FacebookID" ColumnName="FacebookID" />
+                <ScalarProperty Name="TwitterHandler" ColumnName="TwitterHandler" />
+                <ScalarProperty Name="FourSquareID" ColumnName="FourSquareID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sqlblk_Place">
+            <EntityTypeMapping TypeName="ReccitModel.sqlblk_Place">
+              <MappingFragment StoreEntitySet="sqlblk_Place">
+                <ScalarProperty Name="sqlblkJobID" ColumnName="sqlblkJobID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="OpenTanle" ColumnName="OpenTanle" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="FacebookID" ColumnName="FacebookID" />
+                <ScalarProperty Name="FactualID" ColumnName="FactualID" />
+                <ScalarProperty Name="FourSquareID" ColumnName="FourSquareID" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sqlblk_ReccitUser">
+            <EntityTypeMapping TypeName="ReccitModel.sqlblk_ReccitUser">
+              <MappingFragment StoreEntitySet="sqlblk_ReccitUser">
+                <ScalarProperty Name="sqlblkJobID" ColumnName="sqlblkJobID" />
+                <ScalarProperty Name="ReccitUserID" ColumnName="ReccitUserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FacebookID" ColumnName="FacebookID" />
+                <ScalarProperty Name="TwitterHandler" ColumnName="TwitterHandler" />
+                <ScalarProperty Name="FourSquareID" ColumnName="FourSquareID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sqlblk_UserCheckin">
+            <EntityTypeMapping TypeName="ReccitModel.sqlblk_UserCheckin">
+              <MappingFragment StoreEntitySet="sqlblk_UserCheckin">
+                <ScalarProperty Name="sqlblkJobID" ColumnName="sqlblkJobID" />
+                <ScalarProperty Name="FBUserID" ColumnName="FBUserID" />
+                <ScalarProperty Name="PlaceID" ColumnName="PlaceID" />
+                <ScalarProperty Name="IsReccit" ColumnName="IsReccit" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Review" ColumnName="Review" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sqlblk_UserFriendMap">
+            <EntityTypeMapping TypeName="ReccitModel.sqlblk_UserFriendMap">
+              <MappingFragment StoreEntitySet="sqlblk_UserFriendMap">
+                <ScalarProperty Name="sqlblkJobID" ColumnName="sqlblkJobID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FriendID" ColumnName="FriendID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserCheckins">
+            <EntityTypeMapping TypeName="ReccitModel.UserCheckin">
+              <MappingFragment StoreEntitySet="UserCheckin">
+                <ScalarProperty Name="UserCheckinID" ColumnName="UserCheckinID" />
+                <ScalarProperty Name="FBUserID" ColumnName="FBUserID" />
+                <ScalarProperty Name="PlaceID" ColumnName="PlaceID" />
+                <ScalarProperty Name="IsReccit" ColumnName="IsReccit" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Review" ColumnName="Review" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserFriendMaps">
+            <EntityTypeMapping TypeName="ReccitModel.UserFriendMap">
+              <MappingFragment StoreEntitySet="UserFriendMap">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FriendID" ColumnName="FriendID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
